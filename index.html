@@ -1,0 +1,354 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barney's Garage</title>
+  <style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #111;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      color: #d4af37; /* gold */
+      text-align: center;
+    }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      padding: 30px 20px;
+      background: black;
+      color: white;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin: 10px 0;
+    }
+
+    /* Slideshow (FADE FIX) */
+    .slideshow-container {
+      position: relative;
+      max-width: 100%;
+      height: 500px;         /* keep fixed height so it doesn't collapse */
+      margin: auto;
+      overflow: hidden;
+      background: #000;      /* prevents flash of white between fades */
+    }
+    .slides {
+      position: absolute;
+      inset: 0;              /* top/right/bottom/left: 0 */
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;            /* start hidden */
+      transition: opacity 1s ease-in-out; /* fade transition */
+    }
+    .slides.active {
+      opacity: 1;            /* visible slide */
+    }
+    .logo-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;            /* make sure logo sits above slides */
+    }
+    .logo-overlay img {
+      width: 180px;
+      height: auto;
+      object-fit: contain;
+      background: transparent; /* no white background */
+      border: none;            /* no border */
+      border-radius: 0;        /* not circular */
+    }
+
+    /* Counters */
+    .counters {
+      display: flex;
+      justify-content: space-around;
+      margin: 40px 0;
+      text-align: center;
+    }
+    .counter {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    /* Form */
+    form {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin: 40px auto;
+      max-width: 800px;
+    }
+    form label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    form input[type="checkbox"] {
+      width: auto;
+      margin-right: 8px;
+    }
+    form button {
+      background: #d4af37;
+      color: black;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    form button:hover {
+      background: black;
+      color: white;
+    }
+
+   section.about-section {
+      padding: 40px 20px;
+      background: #f4f4f4;
+    }
+    /* Footer */
+    footer {
+      background: black;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    footer a {
+      color: #d4af37;
+      text-decoration: none;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <!-- Slideshow FIRST -->
+  <div class="slideshow-container">
+    <!-- Add 'active' to the first slide so it shows immediately -->
+    <img class="slides active" src="slide1.jpg" alt="Slide 1"> 
+    <img class="slides" src="slide2.jpeg" alt="Slide 2">
+    <img class="slides" src="slide3.jpeg" alt="Slide 3">
+    <img class="slides" src="slide4.jpg" alt="Slide 4"> 
+    <img class="slides" src="slide5.jpg" alt="Slide 5"> 
+    <div class="logo-overlay">
+      <img src="barneylogo.png" alt="Barney's Garage Logo">
+    </div>
+  </div>
+
+  <!-- Header BELOW slideshow -->
+  <header>
+    <h1>Your Trusted Partner in Auto Care</h1>
+  </header>
+
+  <!-- Counters -->
+  <div class="counters container">
+    <div>
+      <div class="counter" data-target="20">0</div>
+      <p>Years Experience</p>
+    </div>
+    <div>
+      <div class="counter" data-target="2023">0</div>
+      <p>Open Since</p>
+    </div>
+    <div>
+      <div class="counter" data-target="900">0</div>
+      <p>Jobs Completed</p>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="container">
+    <h2>Choose From Our List of Services</h2>
+    <p style="text-align:center;font-weight:bold;">READ THOROUGHLY BEFORE SUBMITTING</p>
+    <form id="serviceForm">
+      <label>Phone Number (+1868)</label>
+      <input type="tel" name="phone" required>
+
+      <label>Full Name</label>
+      <input type="text" name="fullname" required>
+
+      <label>License Plate Number</label>
+      <input type="text" name="plate" required>
+
+      <label>Wrecker Services</label>
+      <input type="checkbox" name="service" value="Flatbed Tow"> Flatbed Tow<br>
+      <input type="checkbox" name="service" value="Emergency Towing"> Emergency Towing<br>
+      <input type="checkbox" name="service" value="Vehicle Recovery"> Vehicle Recovery<br>
+
+      <label>Address (for pickup)</label>
+      <input type="text" name="address">
+      <label>City</label>
+      <input type="text" name="city">
+
+      <label>Image of vehicle (if necessary)</label>
+      <input type="file" name="vehicleImage">
+
+      <label>Book a date and time</label>
+      <input type="datetime-local" name="date">
+
+      <h3>Other Services</h3>
+      <input type="checkbox" name="service" value="Oil Change"> Oil Change<br>
+      <input type="checkbox" name="service" value="Engine Diagnostics"> Engine Diagnostics<br>
+      <input type="checkbox" name="service" value="Coolant System Service"> Coolant System Service<br>
+      <input type="checkbox" name="service" value="Radiator Replacement"> Radiator Replacement<br>
+      <input type="checkbox" name="service" value="Fuel Pump Install"> Fuel Pump Install<br>
+      <input type="checkbox" name="service" value="Timing Belt Replacement"> Timing Belt Replacement<br>
+      <input type="checkbox" name="service" value="Brake Pad Replacement"> Brake Pad Replacement<br>
+      <input type="checkbox" name="service" value="Rotor Resurfacing"> Rotor Resurfacing<br>
+      <input type="checkbox" name="service" value="Brake Fluid Flush"> Brake Fluid Flush<br>
+      <input type="checkbox" name="service" value="Spark Plug Change"> Spark Plug Change<br>
+      <input type="checkbox" name="service" value="Throttle Body Cleaning"> Throttle Body Cleaning<br>
+      <input type="checkbox" name="service" value="Idle Adjustment"> Idle Adjustment<br>
+      <input type="checkbox" name="service" value="OBD Scan"> OBD Scan<br>
+      <input type="checkbox" name="service" value="Check Engine Light Diagnosis"> Check Engine Light Diagnosis<br>
+      <input type="checkbox" name="service" value="Electrical System Scan"> Electrical System Scan<br>
+
+      <label>Other Services Not Listed (separate by comma)</label>
+      <textarea name="other"></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <!-- About Section -->
+  <section class="about-section fade-section">
+    <h2 class="gradient-text">About Us</h2>
+    <p>
+        Since opening our doors in 2023, Barney’s Auto has been committed to delivering quality auto repair services you can trust. 
+        Our service, parts, and management teams bring decades of hands-on experience from their tenure at Massy Motors Limited, 
+        giving your vehicle the benefit of unmatched skill and expertise.
+    </p>
+
+    <h3 class="gradient-text">What We Specialize In</h3>
+    <ul>
+        <li>Engine and transmission replacement or repair</li>
+        <li>Fuel and ignition systems diagnostics and service</li>
+        <li>Cooling and lubrication systems maintenance</li>
+        <li>Electrical system repairs</li>
+        <li>Suspension and steering adjustments</li>
+        <li>Brake system repairs</li>
+        <li>Exhaust system maintenance</li>
+    </ul>
+
+    <p>
+        Our skilled technicians use state-of-the-art diagnostic tools and high-quality parts to ensure your car receives the best care possible. 
+        Whether it’s a routine oil change or a major repair, we tailor our services to meet your vehicle’s specific needs.
+    </p>
+
+    <p>
+        At Barney’s Auto, preventative maintenance is at the heart of what we do. 
+        We believe in honest assessments, transparent pricing, and clear communication—so you always know what to expect before any work begins.
+    </p>
+
+    <p>
+        Your satisfaction is our top priority. 
+        We aim to build long-lasting relationships with every customer by delivering exceptional service that keeps you safe and confident on the road.
+    </p>
+
+    <h3 class="gradient-text">Our Vision</h3>
+    <p>
+        To provide seamless, reliable auto repair that gives you peace of mind during every drive.
+    </p>
+
+    <p>
+        And in those unexpected moments, our in-house roadside assistance is just a phone call away—ready to get you back on the road quickly and safely.
+    </p>
+</section>
+
+
+  <!-- Google Map -->
+  <div class="container">
+    <h2>Find Us</h2>
+    <iframe src="https://www.google.com/maps?q=Dorata+St+%26+Old+St.+Joseph+Rd,+Port+of+Spain,+Trinidad+and+Tobago&output=embed" width="100%" height="400" style="border:0;" allowfullscreen=""></iframe>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Powered by <a href="https://zachsdesigns.com" target="_blank">Zach's Designs</a></p>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    // Slideshow FADE
+    let slideIndex = 0;
+    const slides = document.getElementsByClassName("slides");
+
+    function cycleSlides() {
+      // remove active from all
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove("active");
+      }
+      // advance index and activate current
+      slideIndex = (slideIndex + 1) % slides.length;
+      slides[slideIndex].classList.add("active");
+    }
+
+    // Start with first already active (HTML), then rotate
+    setInterval(cycleSlides, 4000);
+
+    // Counter Animation
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+    const options = { threshold: 0.5 };
+
+    const animateCounter = (counter) => {
+      const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const increment = Math.ceil(target / speed);
+        if (count < target) {
+          counter.innerText = count + increment;
+          setTimeout(updateCount, 40);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      updateCount();
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+        }
+      });
+    }, options);
+
+    counters.forEach(counter => observer.observe(counter));
+
+    // WhatsApp Form
+    document.getElementById('serviceForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const formData = new FormData(this);
+      let message = "New Service Booking:%0A";
+      formData.forEach((value, key) => {
+        message += `${key}: ${value}%0A`;
+      });
+      let whatsappURL = "https://wa.me/18683706808?text=" + message;
+      window.open(whatsappURL, '_blank');
+    });
+  </script>
+</body>
+</html>
